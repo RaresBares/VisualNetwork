@@ -7,8 +7,8 @@ import de.rares.visnet.api.math.structures.matrix.Matrix;
 
 public class Vector<T extends Number> implements Structur {
 
-    private final VectorType vectorType;
-    private final int dimension;
+    public final VectorType vectorType;
+    public final int dimension;
     public T[] content;
     public NumberType numberType;
 
@@ -36,6 +36,23 @@ public class Vector<T extends Number> implements Structur {
     }
 
     public Structur multiply(Vector target) {
+
+
+        System.out.print("(");
+        for (T t : this.content) {
+            System.out.print(t + ", ");
+        }
+        System.out.print( ")");
+        System.out.println();
+
+
+
+        System.out.print("(");
+        for (Number t : target.content) {
+            System.out.print(t + ", ");
+        }
+        System.out.print( ")");
+        System.out.println();
 
 
         if (this.vectorType != target.vectorType && this.dimension == target.dimension && this.vectorType == VectorType.ROW) {

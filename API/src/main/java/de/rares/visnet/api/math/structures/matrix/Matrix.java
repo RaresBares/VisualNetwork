@@ -46,7 +46,7 @@ public class Matrix<T extends Number> implements Structur {
                 } else {
 
                     for (int i = 0; i < rows; i++) {
-                        vcont[i] = content[position][rows].longValue();
+                        vcont[i] = content[position][rows - 1].longValue();
                     }
                 }
                 Vector result = new Vector<Long>(vcont.length, NumberType.FULL, vectorType, vcont);
@@ -94,21 +94,50 @@ public class Matrix<T extends Number> implements Structur {
 
 
     }
-/*
+
     public Matrix multiply(Matrix target) {
         if (this.rows == target.columns) {
+
             if (numberType == NumberType.FULL) {
+                Long[][] rescont = new Long[this.rows][target.columns];
 
+                for (int x = 0; x < this.rows; x++) {
+                    Vector rowFromThis = this.getVector(VectorType.ROW,x);
+                    for (int y = 0; y < target.columns; y++) {
+                        Vector columnFromTarget = target.getVector(VectorType.COLUMN,y);
+                        Vector prod = (Vector) rowFromThis.multiply(columnFromTarget);
+                        if(prod.vectorType == VectorType.NUMBER){
+                            rescont[x][y]  =  prod.content[0].longValue();
+                        }
+                    }
+                }
+
+                Matrix<Long> result = new Matrix<Long>(target.columns, this.rows,NumberType.FULL,rescont);
+                return  result;
             } else if (numberType == NumberType.REAL) {
+                Double[][] rescont = new Double[this.rows][target.columns];
 
+                for (int x = 0; x < this.rows; x++) {
+                    for (int y = 0; y < target.columns; y++) {
+                        Vector rowFromThis = this.getVector(VectorType.ROW,x);
+                        Vector columnFromTarget = target.getVector(VectorType.ROW,y);
+                        Vector prod = (Vector) rowFromThis.multiply(columnFromTarget);
+                        if(prod.vectorType == VectorType.NUMBER){
+                            rescont[x][y]  =  prod.content[0].doubleValue();
+                        }
+                    }
+                }
+
+                Matrix<Double> result = new Matrix<Double>(target.columns, this.rows,NumberType.REAL,rescont);
+                return  result;
             } else {
-
+                return null;
             }
         } else {
             throw new ArrayIndexOutOfBoundsException("Matrixmultiplication-conditions are not holden");
 
         }
-    }*/
+    }
 
 
 }

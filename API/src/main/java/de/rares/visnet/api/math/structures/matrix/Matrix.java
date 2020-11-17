@@ -46,7 +46,8 @@ public class Matrix<T extends Number> implements Structur {
                 } else {
 
                     for (int i = 0; i < rows; i++) {
-                        vcont[i] = content[position][rows - 1].longValue();
+
+                        vcont[i] = content[position][i].longValue();
                     }
                 }
                 Vector result = new Vector<Long>(vcont.length, NumberType.FULL, vectorType, vcont);
@@ -102,34 +103,37 @@ public class Matrix<T extends Number> implements Structur {
                 Long[][] rescont = new Long[this.rows][target.columns];
 
                 for (int x = 0; x < this.rows; x++) {
-                    Vector rowFromThis = this.getVector(VectorType.ROW,x);
+                    Vector rowFromThis = this.getVector(VectorType.ROW, x);
                     for (int y = 0; y < target.columns; y++) {
-                        Vector columnFromTarget = target.getVector(VectorType.COLUMN,y);
+                        Vector columnFromTarget = target.getVector(VectorType.COLUMN, y);
                         Vector prod = (Vector) rowFromThis.multiply(columnFromTarget);
-                        if(prod.vectorType == VectorType.NUMBER){
-                            rescont[x][y]  =  prod.content[0].longValue();
+                        if (prod.vectorType == VectorType.NUMBER) {
+                            rescont[y][x] = prod.content[0].longValue();
                         }
                     }
                 }
 
-                Matrix<Long> result = new Matrix<Long>(target.columns, this.rows,NumberType.FULL,rescont);
-                return  result;
+                Matrix<Long> result = new Matrix<Long>(target.columns, this.rows, NumberType.FULL, rescont);
+                return result;
             } else if (numberType == NumberType.REAL) {
                 Double[][] rescont = new Double[this.rows][target.columns];
 
                 for (int x = 0; x < this.rows; x++) {
                     for (int y = 0; y < target.columns; y++) {
-                        Vector rowFromThis = this.getVector(VectorType.ROW,x);
-                        Vector columnFromTarget = target.getVector(VectorType.ROW,y);
+                        Vector rowFromThis = this.getVector(VectorType.ROW, x);
+
+                        Vector columnFromTarget = target.getVector(VectorType.ROW, y);
+
                         Vector prod = (Vector) rowFromThis.multiply(columnFromTarget);
-                        if(prod.vectorType == VectorType.NUMBER){
-                            rescont[x][y]  =  prod.content[0].doubleValue();
+
+                        if (prod.vectorType == VectorType.NUMBER) {
+                            rescont[x][y] = prod.content[0].doubleValue();
                         }
                     }
                 }
 
-                Matrix<Double> result = new Matrix<Double>(target.columns, this.rows,NumberType.REAL,rescont);
-                return  result;
+                Matrix<Double> result = new Matrix<Double>(target.columns, this.rows, NumberType.REAL, rescont);
+                return result;
             } else {
                 return null;
             }
@@ -139,5 +143,138 @@ public class Matrix<T extends Number> implements Structur {
         }
     }
 
+    public Matrix add(Matrix target) {
+
+
+        if (this.columns == target.columns && this.rows == target.rows) {
+            if (this.numberType == target.numberType) {
+                if (this.numberType == NumberType.FULL) {
+                    Long[][] recont = new Long[this.rows][this.columns];
+                    for (int x = 0; x < this.rows; x++) {
+                        for (int y = 0; y < this.columns; y++) {
+                            recont[x][y] = this.content[x][y].longValue() + target.content[x][y].longValue();
+                        }
+                    }
+                    Matrix result = new Matrix(this.columns, this.columns, NumberType.FULL, recont);
+                    return result;
+                } else if (this.numberType == NumberType.REAL) {
+                    Double[][] recont = new Double[this.rows][this.columns];
+                    for (int x = 0; x < this.rows; x++) {
+                        for (int y = 0; y < this.columns; y++) {
+                            recont[x][y] = this.content[x][y].doubleValue() + target.content[x][y].doubleValue();
+                        }
+                    }
+                    Matrix result = new Matrix(this.columns, this.columns, NumberType.REAL, recont);
+                    return result;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            throw new IllegalArgumentException("xy");
+
+        }
+
+    }
+
+    public Matrix transform() {
+
+
+        if (this.numberType == NumberType.FULL) {
+
+            for (int x = 0; x < this.rows; x++) {
+                for (int y = 0; y < this.columns; y++) {
+                    if (x < y) {
+                        Long xy = this.content[x][y].longValue();
+                        Long yx = this.content[y][x].longValue();
+                        System.out.println("switch: " + xy + " and " + yx);
+                        this.content[x][y] = (T) yx;
+                        this.content[y][x] = (T) xy;
+                    }
+                }
+            }
+
+            return this;
+
+
+        } else if (this.numberType == NumberType.REAL) {
+
+            for (int x = 0; x < this.rows; x++) {
+                for (int y = 0; y < this.columns; y++) {
+                    if (x < y) {
+                        Double xy = this.content[x][y].doubleValue();
+                        Double yx = this.content[y][x].doubleValue();
+
+                        this.content[x][y] = (T) yx;
+                        this.content[y][x] = (T) xy;
+                    }
+                }
+            }
+
+            return this;
+
+        } else {
+            throw new IllegalArgumentException("xy");
+
+        }
+
+    }
+
+    public Matrix subtract(Matrix target) {
+
+
+        if (this.columns == target.columns && this.rows == target.rows) {
+            if (this.numberType == target.numberType) {
+                if (this.numberType == NumberType.FULL) {
+                    Long[][] recont = new Long[this.rows][this.columns];
+                    for (int x = 0; x < this.rows; x++) {
+                        for (int y = 0; y < this.columns; y++) {
+                            recont[x][y] = this.content[x][y].longValue() - target.content[x][y].longValue();
+                        }
+                    }
+                    Matrix result = new Matrix(this.columns, this.columns, NumberType.FULL, recont);
+                    return result;
+                } else if (this.numberType == NumberType.REAL) {
+                    Double[][] recont = new Double[this.rows][this.columns];
+                    for (int x = 0; x < this.rows; x++) {
+                        for (int y = 0; y < this.columns; y++) {
+                            recont[x][y] = this.content[x][y].doubleValue() - target.content[x][y].doubleValue();
+                        }
+                    }
+                    Matrix result = new Matrix(this.columns, this.columns, NumberType.REAL, recont);
+                    return result;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            throw new IllegalArgumentException("xy");
+
+        }
+
+    }
+
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < this.rows; i++) {
+            result += "(|";
+            for (int j = 0; j < this.columns; j++) {
+
+                if ((j + 1) < this.columns) {
+                    result += " " + this.content[i][j] + ", ";
+                } else {
+                    result += " " + this.content[i][j] + " ";
+                }
+            }
+            result += "|)";
+            result += "\n";
+        }
+        return result;
+
+    }
 
 }

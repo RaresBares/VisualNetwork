@@ -38,23 +38,6 @@ public class Vector<T extends Number> implements Structur {
     public Structur multiply(Vector target) {
 
 
-        System.out.print("(");
-        for (T t : this.content) {
-            System.out.print(t + ", ");
-        }
-        System.out.print( ")");
-        System.out.println();
-
-
-
-        System.out.print("(");
-        for (Number t : target.content) {
-            System.out.print(t + ", ");
-        }
-        System.out.print( ")");
-        System.out.println();
-
-
         if (this.vectorType != target.vectorType && this.dimension == target.dimension && this.vectorType == VectorType.ROW) {
 
             if (numberType == NumberType.REAL && target.numberType == NumberType.REAL) {
@@ -121,6 +104,35 @@ public class Vector<T extends Number> implements Structur {
 
     }
 
+
+    public String toString() {
+        String result = "";
+        if (vectorType == VectorType.ROW) {
+            result += "(";
+            for (T t : this.content) {
+                if (t != this.content[this.content.length - 1]) {
+                    result += t + ", ";
+                } else {
+                    result += t;
+                }
+            }
+            result += ")";
+            return result;
+        }else{
+            result += "(";
+            for (T t : this.content) {
+                if (t != this.content[this.content.length - 1]) {
+                    result += t + "\n ";
+                } else {
+                    result += t;
+                }
+            }
+            result += ")";
+            return result;
+        }
+
+
+    }
 
     public Vector add(Vector target) {
         return null;

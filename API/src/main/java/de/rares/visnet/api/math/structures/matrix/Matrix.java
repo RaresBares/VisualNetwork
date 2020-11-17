@@ -24,7 +24,7 @@ public class Matrix<T extends Number> implements Structur {
 
     public Vector<T> getVector(VectorType vectorType, int position) {
 
-//ctest
+
         if (numberType == NumberType.FULL) {
             if (vectorType == VectorType.ROW) {
 

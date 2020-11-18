@@ -17,10 +17,10 @@ public class VisNetApi {
     public static void main(String[] args) {
         Vector v = new Vector<Integer>(3, NumberType.FULL, VectorType.COLUMN, new Integer[]{4, 6, 3});
         Vector v2 = new Vector<Integer>(3, NumberType.FULL, VectorType.ROW, new Integer[]{1, 3, 8});
-        Matrix m2 = ((Matrix) v.multiply(v2));
+        Matrix m2 = ((Matrix) v.multiply(v2)).multiply(v);
 
 
-       System.out.println(m2.transform().toString());
+       System.out.println(m2.toString());
 
 
         System.out.println();

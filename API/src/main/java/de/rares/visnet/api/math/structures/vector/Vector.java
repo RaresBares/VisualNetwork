@@ -105,6 +105,91 @@ public class Vector<T extends Number> implements Structur {
     }
 
 
+    public Vector add(Vector target) {
+        if (this.dimension == target.dimension && this.vectorType == target.vectorType) {
+            if (this.numberType == target.numberType) {
+                if (this.numberType == NumberType.FULL) {
+                    Long[] recont = new Long[this.dimension];
+                    for (int x = 0; x < this.dimension; x++) {
+
+                            recont[x] = this.content[x].longValue() + target.content[x].longValue();
+
+                    }
+                     Vector<T> result = new Vector<T>(dimension, numberType, vectorType, (T[]) recont);
+                    return result;
+                } else if (this.numberType == NumberType.REAL) {
+                    Double[] recont = new Double[this.dimension];
+                    for (int x = 0; x < this.dimension; x++) {
+
+                        recont[x] = this.content[x].doubleValue() + target.content[x].doubleValue();
+
+                    }
+                    Vector<T> result = new Vector<T>(dimension, numberType, vectorType, (T[]) recont);
+                    return result;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            throw new IllegalArgumentException("xy");
+
+        }
+    }
+
+    public Vector subtract(Vector target) {
+        if (this.dimension == target.dimension && this.vectorType == target.vectorType) {
+            if (this.numberType == target.numberType) {
+                if (this.numberType == NumberType.FULL) {
+                    Long[] recont = new Long[this.dimension];
+                    for (int x = 0; x < this.dimension; x++) {
+
+                        recont[x] = this.content[x].longValue() - target.content[x].longValue();
+
+                    }
+                    Vector<T> result = new Vector<T>(dimension, numberType, vectorType, (T[]) recont);
+                    return result;
+                } else if (this.numberType == NumberType.REAL) {
+                    Double[] recont = new Double[this.dimension];
+                    for (int x = 0; x < this.dimension; x++) {
+
+                        recont[x] = this.content[x].doubleValue() - target.content[x].doubleValue();
+
+                    }
+                    Vector<T> result = new Vector<T>(dimension, numberType, vectorType, (T[]) recont);
+                    return result;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            throw new IllegalArgumentException("xy");
+
+        }
+    }
+
+    public Vector transform() {
+
+
+        if(this.vectorType == VectorType.COLUMN){
+            Vector result = new Vector(dimension, numberType, VectorType.ROW,content);
+            return result;
+        }else {
+            Vector result = new Vector(dimension, numberType, VectorType.COLUMN,content);
+            return result;
+        }
+
+
+    }
+
+    public Vector copy(){
+        Vector result = new Vector(dimension, numberType, vectorType,content);
+        return result;
+    }
+
     public String toString() {
         String result = "";
         if (vectorType == VectorType.ROW) {
@@ -118,7 +203,7 @@ public class Vector<T extends Number> implements Structur {
             }
             result += ")";
             return result;
-        }else{
+        } else {
             result += "(";
             for (T t : this.content) {
                 if (t != this.content[this.content.length - 1]) {
@@ -134,19 +219,4 @@ public class Vector<T extends Number> implements Structur {
 
     }
 
-    public Vector add(Vector target) {
-        return null;
-    }
-
-    public Vector subtract(Vector target) {
-        return null;
-    }
-
-    public Vector divide(Vector target) {
-        return null;
-    }
-
-    public Vector pow(Vector target) {
-        return null;
-    }
 }

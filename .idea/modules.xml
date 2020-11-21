@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/API/API.iml" filepath="$PROJECT_DIR$/API/API.iml" />
       <module fileurl="file://$PROJECT_DIR$/Example/Example.iml" filepath="$PROJECT_DIR$/Example/Example.iml" />
       <module fileurl="file://$PROJECT_DIR$/Experiments/Experiments.iml" filepath="$PROJECT_DIR$/Experiments/Experiments.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OpenImageFilter/OpenImageFilter.iml" filepath="$PROJECT_DIR$/OpenImageFilter/OpenImageFilter.iml" />
       <module fileurl="file://$PROJECT_DIR$/VisNet/VisNet.iml" filepath="$PROJECT_DIR$/VisNet/VisNet.iml" />
       <module fileurl="file://$PROJECT_DIR$/VisualNetwork.iml" filepath="$PROJECT_DIR$/VisualNetwork.iml" />
     </modules>

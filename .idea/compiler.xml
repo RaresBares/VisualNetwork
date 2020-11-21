@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="API" />
         <module name="VisualNetwork" />
-        <module name="OpenImageFilter" />
         <module name="Experiments" />
         <module name="Example" />
       </profile>

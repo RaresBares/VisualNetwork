@@ -1,21 +1,4 @@
-package de.rares.visnet.api.math.differentials;
-
-
-import de.rares.visnet.api.math.function.Function;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public class DifFunction {
-
-
-    public Function function;
-
-    public DifFunction(Function function) {
-        this.function = function;
-    }
-
-    public Function[] part() {
+ public Function[] part() {
 
         String gpattern = function.pattern;
         int waitingClauses = 0;
@@ -68,4 +51,3 @@ public class DifFunction {
         return parts.toArray(new Function[parts.size()]);
 
     }
-}

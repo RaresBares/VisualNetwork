@@ -1,6 +1,5 @@
 package de.rares.visnet.api.neuronalnetwork.normal;
 
-import de.rares.visnet.api.math.function.Function;
 import de.rares.visnet.api.neuronalnetwork.normal.element.layer.Layer;
 
 
@@ -15,13 +14,15 @@ Notice:
 weights are named like: w1223
 which means: Weight for the connection between the  third neuron in Layer 2 and the 4th Neuron in Layer 3
 
+neurons are named like: n12
+which means: the third neuron in the second layer
  */
 
 
     public Layer[] structure;
     public int outputDimension;
     public int inputDimension;
-    public Function nnFunction;
+
     public NormalNeuronalNetwork(Layer[] structure) {
         this.structure = structure;
         outputDimension = structure[structure.length -1].dimension;
@@ -63,8 +64,7 @@ which means: Weight for the connection between the  third neuron in Layer 2 and 
 
     }
 
-
-    public String[] convertToFunction(String[] prefNeurons,  int layerPos){
+    private String[] convertToFunction(String[] prefNeurons,  int layerPos){
 
 
             Layer layer = structure[layerPos];

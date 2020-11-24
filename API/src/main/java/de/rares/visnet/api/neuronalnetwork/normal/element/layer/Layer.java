@@ -24,6 +24,7 @@ public class Layer {
 
     public Layer(int dimension, ActivationFunction activationFunction) {
         this.dimension = dimension;
+        this.neurons = new Neuron[dimension];
         this.activationFunction = activationFunction;
         randomize();
         setupNeurons();

@@ -1,15 +1,21 @@
 package de.rares.visnet.api.neuronalnetwork.normal;
 
 import de.rares.visnet.api.math.function.Function;
-import de.rares.visnet.api.math.structures.vector.Vector;
 import de.rares.visnet.api.neuronalnetwork.normal.element.layer.Layer;
-import de.rares.visnet.api.neuronalnetwork.normal.element.neuron.Neuron;
 
 
 
 
 public class NormalNeuronalNetwork {
+/*
 
+Notice:
+
+
+weights are named like: w1223
+which means: Weight for the connection between the  third neuron in Layer 2 and the 4th Neuron in Layer 3
+
+ */
 
 
     public Layer[] structure;
@@ -20,21 +26,72 @@ public class NormalNeuronalNetwork {
         this.structure = structure;
         outputDimension = structure[structure.length -1].dimension;
         inputDimension = structure[0].dimension;
+
     }
 
 
+    public String[] convertToFunction(){
+        int layerPos = 0;
 
-    public void convertToFunction(int layerPos){
+        Layer layer = structure[layerPos];
+        String[] result = new String[layer.dimension];
+        for (int i = 0; i < layer.dimension; i++) {
+
+            String neuron = "sig(";
+            for (int j = 0; j < layer.neurons.length; j++) {
+                if((j + 1) == layer.neurons.length){
+                    neuron += "N" + (layerPos ) + "" + j  + " * "  + "W" + (layerPos ) + "" + j + "" + (layerPos + 1) + "" + i + ")" ;
+                }else {
+                    neuron += "N" + (layerPos ) + "" + j  + " * "  + "W" + (layerPos ) + "" + j + "" + (layerPos + 1) + "" + i + " + " ;
+                }
+            }
+
+            result[i] = neuron;
+
+        }
+
+            String[] resu = result;
+        for (int i = 1; i < layer.dimension; i++) {
+            resu = convertToFunction(resu,  i );
+        }
+
+
+        return resu;
+
+
+
+
+    }
+
+
+    public String[] convertToFunction(String[] prefNeurons,  int layerPos){
 
 
             Layer layer = structure[layerPos];
+        String[] result = new String[layer.dimension];
+        for (int i = 0; i < layer.dimension; i++) {
 
-            for (int nPos = 0; nPos < layer.dimension; nPos++ ){
-
-                Neuron n = layer.neurons[nPos];
-                Vector<Double> neuronWeights = layer.weights[nPos];
-                                
+            String neuron = "sig(";
+            for (int j = 0; j < layer.neurons.length; j++) {
+              if((j + 1) == layer.neurons.length){
+                  neuron += prefNeurons[j] + " * "  + "W" + (layerPos ) + "" + j + "" + (layerPos + 1)  + "" + i + ")" ;
+              }else {
+                  neuron += prefNeurons[j]   + " * "  + "W" + (layerPos ) + "" + j + "" + (layerPos + 1)  + "" + i + " + " ;
+              }
             }
+
+            result[i] = neuron;
+
+        }
+
+
+            return result;
+
+
+
+
+
+
 
     }
 

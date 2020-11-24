@@ -20,6 +20,8 @@ public class Neuron {
         this.elementType = elementType;
     }
 
+
+
     public double process(Vector<Double> i) {
         if (elementType.equals(ElementType.INPUT) && i.dimension == 1) {
             return i.content[0];

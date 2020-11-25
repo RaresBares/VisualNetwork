@@ -1,4 +1,4 @@
-package de.rares.visnet.api.math.diff.quot;
+package de.rares.visnet.api.math.diff.derivative;
 
 public enum Patterns {
 

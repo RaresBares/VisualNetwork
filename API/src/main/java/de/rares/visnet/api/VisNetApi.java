@@ -1,7 +1,7 @@
 package de.rares.visnet.api;
 
 
-import de.rares.visnet.api.math.diff.quot.DifferentialCalc;
+import de.rares.visnet.api.math.diff.derivative.patterns.Pow;
 
 public class VisNetApi {
 
@@ -23,8 +23,10 @@ public class VisNetApi {
 
 
 
-        String function = "4 * x^(2)";
-        DifferentialCalc diff = new DifferentialCalc(function, new String[]{"x"});
+        String function = "(x +2 + 34)^(2)";
+        System.out.println(function);
+        System.out.println(Pow.of(function).partfirst + "    " + Pow.of(function).partsecond);
+      //  DifferentialCalc diff = new DifferentialCalc(function, new String[]{"x"});
     }
 
 

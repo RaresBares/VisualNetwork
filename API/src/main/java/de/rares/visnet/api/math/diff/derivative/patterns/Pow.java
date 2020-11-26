@@ -65,7 +65,7 @@ public class Pow extends Pattern {
 
     @Override
     public String getDerivate() {
-        return null;
+        return  partsecond + " * " + "(" + partfirst + ")" +"^(" + partsecond + " - 1)";
     }
 
 

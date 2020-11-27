@@ -1,7 +1,7 @@
 package de.rares.visnet.api;
 
 
-import de.rares.visnet.api.math.diff.derivative.patterns.Pow;
+import de.rares.visnet.api.math.diff.derivative.patterns.Dericative;
 
 public class VisNetApi {
 
@@ -23,9 +23,11 @@ public class VisNetApi {
 
 
 
-        String function = "(x +2 + 34)^(2)";
-        System.out.println(function);
-        System.out.println(Pow.of(function).partfirst + "    " + Pow.of(function).partsecond);
+        String function = "x + (((((x +2 + 34)^(2)))))".replace(" ", "");
+        Dericative d = new Dericative(function);
+        d.trimClauses(true);
+            System.out.println( d.optimizeFunction());
+
       //  DifferentialCalc diff = new DifferentialCalc(function, new String[]{"x"});
     }
 

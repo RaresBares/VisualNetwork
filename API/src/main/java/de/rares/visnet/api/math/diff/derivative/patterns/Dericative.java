@@ -3,7 +3,6 @@ package de.rares.visnet.api.math.diff.derivative.patterns;
 import de.rares.visnet.api.image.algorithms.structures.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Dericative {
 
@@ -12,6 +11,46 @@ public class Dericative {
 
     public Dericative(String function) {
         this.function = function;
+    }
+
+    public String[] splitMultiply(String function) {
+        ArrayList<String> parts = new ArrayList<String>();
+        int waitingClauses = 0;
+        int lastpos = 0;
+        int pos = 0;
+        for (int i = 0; i < function.toCharArray().length; i++) {
+
+
+            char c = function.charAt(i);
+
+            if (c != '+' && c != '(' && c != ')') {
+
+            } else if (c == '+') {
+                if (waitingClauses == 0) {
+                    parts.add(function.substring(lastpos, i));
+
+                    lastpos = i + 1;
+                    pos++;
+
+
+                }
+            } else if (c == '(') {
+
+
+                waitingClauses += 1;
+
+            } else if (c == ')') {
+
+
+                waitingClauses -= 1;
+
+
+            }
+
+        }
+        parts.add(function.substring(lastpos));
+        String[] res = parts.toArray(new String[parts.size()]);
+        return res;
     }
 
     public String[] splitLinearAdd() {
@@ -106,16 +145,22 @@ public class Dericative {
 
         }
 
-        if(key.endsWith("*")){
+        if (key.endsWith("*")) {
             key = key.substring(0, key.length() - 1);
             key += ")";
         }
-        if(value.endsWith("*")){
+        if (value.endsWith("*")) {
             value = value.substring(0, value.length() - 1);
             value += ")";
         }
+        if (value == "()") {
+            value = "";
+        }
 
-        Pair pair = new Pair<String ,String>(key, value);
+        if (key == "()") {
+            key = "";
+        }
+        Pair pair = new Pair<String, String>(key, value);
         return pair;
     }
 
@@ -192,18 +237,68 @@ public class Dericative {
 
     }
 
-    public HashMap<String, Pattern> getPattern(String[] parts){
+    public String getPattern(String f) {
+        System.out.println(f);
+        ArrayList<String> parts = new ArrayList<String>();
+        int waitingClauses = 0;
+        int lastpos = 0;
+        int pos = 0;
+        String pattern = "";
+        for (int i = 0; i < function.toCharArray().length; i++) {
 
-        for (String part : parts) {
+
+            char c = function.charAt(i);
+
+            if (c != '+' && c != '(' && c != ')') {
+
+            } else if (c == '+') {
+                if (waitingClauses == 0) {
+                    parts.add(function.substring(lastpos, i));
+
+                    lastpos = i + 1;
+                    pos++;
+
+
+
+                }
+            } else if (c == '(') {
+
+                if(waitingClauses == 0){
+                    if(i >= 1)
+                    pattern += function.charAt(i - 1);
+                }
+                waitingClauses += 1;
+
+            } else if (c == ')') {
+                if(waitingClauses == 1)
+                pattern += "v";
+
+
+                waitingClauses -= 1;
+
+
+            }
+
 
         }
 
-            return null;
+        return pattern;
     }
 
-    public String getDerivative() {
-        return "";
+  /*  public String getDerivative() {
+        trimClauses(true);
+        String derivative = "";
+        for (String s : splitLinearAdd()) {
+            Pair<String, String> prod = extrConst();
+            String consts = prod.getKey();
+            String depend = prod.getValue(); // x^2 * x^3 = 2 x * x^3 +
+            for (String f : splitMultiply(depend)) {
+                function = " + " + getPattern(f).getDerivate();
+            }
+
+        }
 
     }
-
+    
+*/
 }

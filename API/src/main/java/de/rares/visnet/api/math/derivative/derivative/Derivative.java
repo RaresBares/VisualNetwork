@@ -1,15 +1,19 @@
-package de.rares.visnet.api.math.diff.derivative.patterns;
+package de.rares.visnet.api.math.derivative.derivative;
 
 import de.rares.visnet.api.image.algorithms.structures.Pair;
+import de.rares.visnet.api.math.derivative.derivative.patterns.Pattern;
+import de.rares.visnet.api.math.derivative.derivative.patterns.Pow;
+import de.rares.visnet.api.math.derivative.derivative.patterns.Quotient;
+import de.rares.visnet.api.math.derivative.derivative.patterns.X;
 
 import java.util.ArrayList;
 
-public class Dericative {
+public class Derivative {
 
     public String function;
 
 
-    public Dericative(String function) {
+    public Derivative(String function) {
         this.function = function;
     }
 
@@ -121,6 +125,11 @@ public class Dericative {
         }
        parts.add(function.substring(lastpos));
         String[] res = parts.toArray(new String[parts.size()]);
+        for (String part : parts) {
+           if(part == ""){
+               res = null;
+           }
+        }
         return res;
     }
 
@@ -172,7 +181,7 @@ public class Dericative {
 
         for (String s : splitLinearAdd()) {
 
-            Dericative dv = new Dericative(s.trim());
+            Derivative dv = new Derivative(s.trim());
 
             dv.trimClauses(true);
 
@@ -184,9 +193,9 @@ public class Dericative {
 
     }
 
-    public Pair<String, String> extrConst() {
-    if(!function.contains("x")){
-        return new Pair<>("","");
+    public Pair<String, String> extrConst(String target) {
+    if(!function.contains(target)){
+        return new Pair<>(function,"");
     }
 
         ArrayList<String> parts = new ArrayList<String>();
@@ -229,7 +238,7 @@ public class Dericative {
         for (int i = 0; i < res.length; i++) {
             String part = res[i];
 
-            if(part.contains("x")){
+            if(part.contains(target)){
 
             value += part + "*";
 
@@ -324,10 +333,12 @@ public class Dericative {
 
     }
 
-    public Pattern getPattern(String f) {
+    public Pattern getPattern(String f, String target) {
+
         String patternConv = "";
 
         try {
+
             ArrayList<String> parts = new ArrayList<String>();
             int waitingClauses = 0;
             int lastpos = 0;
@@ -370,15 +381,21 @@ public class Dericative {
 
             }
         }catch (Exception e){
-            if(f == "x"){
+            if(f.replace(" ", "") == target){
+
                 patternConv = "v";
             }
         }
+        if(f.equals(target)){
 
+            patternConv = "v";
+        }
         Pattern pattern = null;
         switch (patternConv) {
 
             case "v/v":
+
+                pattern = Quotient.of(f);
                 break;
             case "v^v":
 
@@ -395,38 +412,45 @@ public class Dericative {
 
 
 
-    public String getDerivative() {
+    public String getDerivative(String target) {
+
+
+        if(!function.contains(target)){
+            return 0 + "";
+        }
 
         trimClauses(true);
 
         String derivative = "";
         String[] lin = splitLinearAdd();
+
         for (String s : lin) {
 
-        }
-        for (String s : lin) {
-
-            Pair<String, String> prod = new Dericative(s).extrConst();
+            Pair<String, String> prod = new Derivative(s).extrConst(target);
 
             String consts = prod.getKey();
 
 
             String depend = prod.getValue(); // x^2 * x^3
 
+          
             String[] mult = splitMultiply(trimClauses(depend, true)); // String[] mult = splitMultiply(trimClauses(depend, true));
 
+            if(mult == null){
+
+            }else {
             if (mult.length == 1) {
-
-                Pattern p = getPattern(trimClauses(mult[0], true));
-
-                derivative =  p.getDerivate(); //derivative = "" + getPattern(trimClauses(mult[0], true)).getDerivate();
+               
+                Pattern p = getPattern(trimClauses(mult[0], true),target);
+        
+                derivative =  p.getDerivate(target); //derivative = "" + getPattern(trimClauses(mult[0], true)).getDerivate();
 
             } else if (mult.length > 1) {
 
 
                 for (String m : mult) {
 
-                    String mder = new Dericative(m).getDerivative();
+                    String mder = new Derivative(m).getDerivative(target);
                     for (String t : mult) {
 
                         if(t != m ){
@@ -443,7 +467,7 @@ public class Dericative {
                 derivative = derivative.substring(0, derivative.length() - 1);
 
 
-            }
+            }}
             if (consts != "") {
 
             derivative = consts + "* (" +  derivative + ")";

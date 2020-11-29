@@ -1,4 +1,6 @@
-package de.rares.visnet.api.math.diff.derivative.patterns;
+package de.rares.visnet.api.math.derivative.derivative.patterns;
+
+import de.rares.visnet.api.math.derivative.derivative.Derivative;
 
 public class Pow extends Pattern {
 
@@ -65,19 +67,35 @@ public class Pow extends Pattern {
     }
 
     @Override
-    public String getDerivate() {
+    public String getDerivate(String target) {
 
         String der = partsecond + " * " + "(" + partfirst + ")" +"^(" + partsecond + " - 1)";
 
-        if(partfirst.contains("x") && !partfirst.equals("x")){
-            String chain = new Dericative(partfirst).getDerivative();
 
-            der += " * " + chain  + " " ;
+        if (partfirst.contains(target) && !partfirst.equals(target)) {
+            String chain = new Derivative(partfirst).getDerivative(target);
 
+            der += " * " + chain + " ";
+
+        } else if (!partfirst.contains(target)) {
+
+            if (partfirst.equals("e")) {
+                if (partsecond.contains(target)) {
+                    der = "(" + partfirst + ")" + "^(" + partsecond + ")";
+
+                }     } else {
+
+
+                der = "ln(" + partfirst + ")*(" + partfirst + ")^(" + partsecond + ")";
+
+            }
+
+            }
+        return  der;
         }
 
-        return  der;
-    }
+
+
 
 
 }

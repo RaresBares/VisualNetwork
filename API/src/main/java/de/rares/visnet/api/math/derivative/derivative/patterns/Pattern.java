@@ -1,4 +1,4 @@
-package de.rares.visnet.api.math.diff.derivative.patterns;
+package de.rares.visnet.api.math.derivative.derivative.patterns;
 
 public abstract class Pattern {
 
@@ -12,7 +12,7 @@ public abstract class Pattern {
 
 
 
-    public abstract String getDerivate();
+    public abstract String getDerivate(String target);
 
 
 

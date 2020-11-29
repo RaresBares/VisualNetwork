@@ -1,4 +1,4 @@
-package de.rares.visnet.api.math.diff.derivative.patterns;
+package de.rares.visnet.api.math.derivative.derivative.patterns;
 
 public class X extends Pattern {
     public X(String partfirst) {
@@ -11,7 +11,7 @@ public class X extends Pattern {
     }
 
     @Override
-    public String getDerivate() {
+    public String getDerivate(String target) {
         return "1";
     }
 }

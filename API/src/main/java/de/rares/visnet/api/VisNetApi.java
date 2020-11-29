@@ -24,11 +24,14 @@ public class VisNetApi {
 
 
 
-        String function = "(((x)^(2))/(3))^(g)".replace(" ", "");
+      String function = "((2) * (x)^(3) + 3)^(5)".replace(" ", "");
         Dericative d = new Dericative(function);
 
 
-       System.out.println(d.getPattern(function));
+       System.out.println("Ableitung: " + d.getDerivative());
+
+
+
       //  DifferentialCalc diff = new DifferentialCalc(function, new String[]{"x"});
     }
 

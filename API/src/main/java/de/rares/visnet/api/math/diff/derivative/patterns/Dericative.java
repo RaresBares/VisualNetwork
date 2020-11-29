@@ -13,6 +13,75 @@ public class Dericative {
         this.function = function;
     }
 
+    public static String trimClauses(String function, boolean deep) {
+
+
+                String f = function;
+        int waitingClauses = 0;
+        boolean first = false;
+        String newFunction = "";
+        for (int i = 0; i < function.toCharArray().length; i++) {
+
+            char c = function.charAt(i);
+
+            if (c == '(') {
+
+
+                waitingClauses += 1;
+
+                if (i == 0 && first == false) {
+                    first = true;
+                } else if (i != 0 && first == false) {
+                    return f;
+                }
+
+            } else if (c == ')') {
+
+                waitingClauses--;
+
+                if (first == true && waitingClauses == 0 && i == (function.length() - 1)) {
+                    newFunction = function.substring(1, function.length() - 1);
+
+
+                } else if (first == true && waitingClauses == 0 && i != (function.length() - 1)) {
+                    return f;
+                }else if(first == false){
+                    return f;
+                }
+
+
+            }
+
+        }
+
+        if(newFunction == "")
+            newFunction = function;
+
+
+
+        if (newFunction != function) {
+            if (deep) {
+                f = newFunction;
+
+                String deepFunction = trimClauses(f, false);
+
+                if (newFunction != deepFunction) {
+
+                    f = trimClauses(f,true);
+                    return f;
+
+                }
+                return f;
+            } else {
+
+                f = newFunction;
+                return f;
+            }
+        }
+        return f;
+
+    }
+
     public String[] splitMultiply(String function) {
         ArrayList<String> parts = new ArrayList<String>();
         int waitingClauses = 0;
@@ -23,11 +92,13 @@ public class Dericative {
 
             char c = function.charAt(i);
 
-            if (c != '+' && c != '(' && c != ')') {
+            if (c != '*' && c != '(' && c != ')') {
 
-            } else if (c == '+') {
+            } else if (c == '*') {
                 if (waitingClauses == 0) {
-                    parts.add(function.substring(lastpos, i));
+
+
+                 //   parts.add(function.substring(lastpos, i));
 
                     lastpos = i + 1;
                     pos++;
@@ -48,12 +119,13 @@ public class Dericative {
             }
 
         }
-        parts.add(function.substring(lastpos));
+       parts.add(function.substring(lastpos));
         String[] res = parts.toArray(new String[parts.size()]);
         return res;
     }
 
     public String[] splitLinearAdd() {
+
         ArrayList<String> parts = new ArrayList<String>();
         int waitingClauses = 0;
         int lastpos = 0;
@@ -94,7 +166,29 @@ public class Dericative {
         return res;
     }
 
+    public String optimizeFunction() {
+
+        String newFunction = "";
+
+        for (String s : splitLinearAdd()) {
+
+            Dericative dv = new Dericative(s.trim());
+
+            dv.trimClauses(true);
+
+
+            newFunction += dv.trimClauses(true);
+        }
+        function = newFunction;
+        return function;
+
+    }
+
     public Pair<String, String> extrConst() {
+    if(!function.contains("x")){
+        return new Pair<>("","");
+    }
+
         ArrayList<String> parts = new ArrayList<String>();
         int waitingClauses = 0;
         int lastpos = 0;
@@ -131,7 +225,7 @@ public class Dericative {
         }
         parts.add(function.substring(lastpos));
         String[] res = parts.toArray(new String[parts.size()]);
-       String key = "(",value = "(";
+       String key = "",value = "";
         for (int i = 0; i < res.length; i++) {
             String part = res[i];
 
@@ -146,40 +240,30 @@ public class Dericative {
         }
 
         if (key.endsWith("*")) {
+
             key = key.substring(0, key.length() - 1);
-            key += ")";
+            //key += ")";
         }
         if (value.endsWith("*")) {
+
             value = value.substring(0, value.length() - 1);
-            value += ")";
+          //  value += ")";
         }
         if (value == "()") {
+
             value = "";
         }
 
         if (key == "()") {
+
             key = "";
         }
+
+
+
+
         Pair pair = new Pair<String, String>(key, value);
         return pair;
-    }
-
-    public String optimizeFunction() {
-
-        String newFunction = "";
-
-        for (String s : splitLinearAdd()) {
-
-            Dericative dv = new Dericative(s.trim());
-
-            dv.trimClauses(true);
-
-
-            newFunction += dv.trimClauses(true);
-        }
-        function = newFunction;
-        return function;
-
     }
 
     public String trimClauses(boolean deep) {
@@ -217,6 +301,9 @@ public class Dericative {
             }
 
         }
+        if(newFunction == "")
+            newFunction = function;
+
 
         if (newFunction != function) {
             if (deep) {
@@ -237,68 +324,137 @@ public class Dericative {
 
     }
 
-    public String getPattern(String f) {
-        System.out.println(f);
-        ArrayList<String> parts = new ArrayList<String>();
-        int waitingClauses = 0;
-        int lastpos = 0;
-        int pos = 0;
-        String pattern = "";
-        for (int i = 0; i < function.toCharArray().length; i++) {
+    public Pattern getPattern(String f) {
+        String patternConv = "";
+
+        try {
+            ArrayList<String> parts = new ArrayList<String>();
+            int waitingClauses = 0;
+            int lastpos = 0;
+            int pos = 0;
+             patternConv = "";
+            for (int i = 0; i < function.toCharArray().length; i++) {
 
 
-            char c = function.charAt(i);
+                char c = function.charAt(i);
 
-            if (c != '+' && c != '(' && c != ')') {
+                if (c != '+' && c != '(' && c != ')') {
 
-            } else if (c == '+') {
-                if (waitingClauses == 0) {
-                    parts.add(function.substring(lastpos, i));
+                } else if (c == '+') {
+                    if (waitingClauses == 0) {
+                        parts.add(f.substring(lastpos, i));
 
-                    lastpos = i + 1;
-                    pos++;
+                        lastpos = i + 1;
+                        pos++;
 
+
+                    }
+                } else if (c == '(') {
+
+                    if (waitingClauses == 0) {
+                        if (i >= 1)
+                            patternConv += f.charAt(i - 1);
+                    }
+                    waitingClauses += 1;
+
+                } else if (c == ')') {
+                    if (waitingClauses == 1)
+                        patternConv += "v";
+
+
+                    waitingClauses -= 1;
 
 
                 }
-            } else if (c == '(') {
-
-                if(waitingClauses == 0){
-                    if(i >= 1)
-                    pattern += function.charAt(i - 1);
-                }
-                waitingClauses += 1;
-
-            } else if (c == ')') {
-                if(waitingClauses == 1)
-                pattern += "v";
-
-
-                waitingClauses -= 1;
 
 
             }
+        }catch (Exception e){
+            if(f == "x"){
+                patternConv = "v";
+            }
+        }
 
+        Pattern pattern = null;
+        switch (patternConv) {
+
+            case "v/v":
+                break;
+            case "v^v":
+
+                pattern = Pow.of(f);
+                break;
+            case "v":
+
+                pattern = X.of(f);
 
         }
 
         return pattern;
     }
 
-  /*  public String getDerivative() {
+
+
+    public String getDerivative() {
+
         trimClauses(true);
+
         String derivative = "";
-        for (String s : splitLinearAdd()) {
-            Pair<String, String> prod = extrConst();
+        String[] lin = splitLinearAdd();
+        for (String s : lin) {
+
+        }
+        for (String s : lin) {
+
+            Pair<String, String> prod = new Dericative(s).extrConst();
+
             String consts = prod.getKey();
-            String depend = prod.getValue(); // x^2 * x^3 = 2 x * x^3 +
-            for (String f : splitMultiply(depend)) {
-                function = " + " + getPattern(f).getDerivate();
+
+
+            String depend = prod.getValue(); // x^2 * x^3
+
+            String[] mult = splitMultiply(trimClauses(depend, true)); // String[] mult = splitMultiply(trimClauses(depend, true));
+
+            if (mult.length == 1) {
+
+                Pattern p = getPattern(trimClauses(mult[0], true));
+
+                derivative =  p.getDerivate(); //derivative = "" + getPattern(trimClauses(mult[0], true)).getDerivate();
+
+            } else if (mult.length > 1) {
+
+
+                for (String m : mult) {
+
+                    String mder = new Dericative(m).getDerivative();
+                    for (String t : mult) {
+
+                        if(t != m ){
+
+                            derivative +=  t+ "*";
+                        }else{
+
+                        }
+
+                    }
+
+                    derivative += mder + "+";
+                }
+                derivative = derivative.substring(0, derivative.length() - 1);
+
+
+            }
+            if (consts != "") {
+
+            derivative = consts + "* (" +  derivative + ")";
+           return derivative;
+
             }
 
         }
 
+        return derivative;
     }
-    
-*/
+
+
 }

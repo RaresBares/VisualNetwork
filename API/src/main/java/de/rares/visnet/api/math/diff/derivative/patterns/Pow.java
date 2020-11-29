@@ -55,6 +55,7 @@ public class Pow extends Pattern {
                     }
 
                 }
+
                 return new Pow(partfirst, partsecond);
             }
         }
@@ -65,7 +66,17 @@ public class Pow extends Pattern {
 
     @Override
     public String getDerivate() {
-        return  partsecond + " * " + "(" + partfirst + ")" +"^(" + partsecond + " - 1)";
+
+        String der = partsecond + " * " + "(" + partfirst + ")" +"^(" + partsecond + " - 1)";
+
+        if(partfirst.contains("x") && !partfirst.equals("x")){
+            String chain = new Dericative(partfirst).getDerivative();
+
+            der += " * " + chain  + " " ;
+
+        }
+
+        return  der;
     }
 
 

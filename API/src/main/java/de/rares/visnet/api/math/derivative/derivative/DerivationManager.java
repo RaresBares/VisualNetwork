@@ -16,7 +16,7 @@ public class DerivationManager {
     }
 
     public String derive(String refer){
-
+//s
         return derivative.getDerivative(refer);
 
     }

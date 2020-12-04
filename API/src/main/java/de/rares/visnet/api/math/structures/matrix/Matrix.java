@@ -22,6 +22,8 @@ public class Matrix<T extends Number> implements Structur {
         content = (T[][]) new Number[columns][rows];
     }
 
+
+
     public Vector<T> getVector(VectorType vectorType, int position) {
 
 

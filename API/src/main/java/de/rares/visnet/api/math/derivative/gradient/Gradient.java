@@ -6,7 +6,7 @@ public class Gradient {
 
     public Gradient(String[] derivations, String[] dimensions){
 
-        
+
 
 
     }

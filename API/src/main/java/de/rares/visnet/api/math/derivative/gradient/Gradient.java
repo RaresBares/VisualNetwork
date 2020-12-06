@@ -25,7 +25,7 @@ public class Gradient {
     public HashMap<String, Double> getGradient(double[] coords){
 
 
-
+return null;
     }
 
 }

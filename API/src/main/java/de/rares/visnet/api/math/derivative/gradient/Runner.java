@@ -7,7 +7,7 @@ public class Runner {
 
 
     public Gradient gradient;
-
+    public GradientType type;
     public HashMap<String, Double> coords;
 
     public Runner(Gradient gradient, HashMap<String, Double> coords) {
@@ -16,7 +16,28 @@ public class Runner {
     }
 
 
+    public void walk(HashMap<String, Double> dir){
 
-    public HashMap<String, Double> getForce(){}
+
+    }
+
+
+    public HashMap<String, Double> getForce(){
+
+        if(type == GradientType.SMOOTH){
+
+            for (String var : coords.keySet()) {
+              //  double der = gar;
+            }
+
+        }else if(type == GradientType.ZICKZACK){
+
+
+
+        }
+
+
+return null;
+    }
 
 }

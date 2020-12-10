@@ -1,12 +1,11 @@
 package de.rares.visnet.api.math.calculator;
 
-import de.rares.visnet.api.math.calculator.function.ComplexNumber;
 import de.rares.visnet.api.math.calculator.function.ComplexFunction;
+import de.rares.visnet.api.math.calculator.function.ComplexNumber;
 import de.rares.visnet.api.math.calculator.function.Function;
 import de.rares.visnet.api.math.calculator.function.MultiDimensionalFunction;
 import de.rares.visnet.api.math.calculator.util.CalcResult;
 import de.rares.visnet.api.math.calculator.util.Point;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -224,4 +223,6 @@ private static List<String> pointToVar(final Point... values) {
 		}
 		return result;
 	}
+
+	public static CalcResult calc(String term){}
 }

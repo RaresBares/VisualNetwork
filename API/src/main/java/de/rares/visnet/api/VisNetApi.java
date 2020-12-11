@@ -16,7 +16,7 @@ public class VisNetApi {
 
 
            String function = "(x)^(3)";
-           String pos = "3.2";
+        /   String pos = "3.2";
            System.out.println(new Derivative(function).getDerivative("x").replaceAll("x", pos));
      //   System.out.println( Parser.eval(new Derivative(function).getDerivative("x").replaceAll("x", pos)).getValue());
 

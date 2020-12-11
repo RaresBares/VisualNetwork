@@ -56,19 +56,19 @@ public class Function {
 
 				if (hasNumber) {
 					final Double numb = new Double(number);
-					final String new_f_x = f_x.substring(i + 1, f_x.length());
+					final String new_f_x = f_x.substring(i + 1);
 					value = numb + eval(new_f_x, xi);
 					i = i + new_f_x.length();
 					hasNumber = false;
 					number = "";
 				} else if (hasFunction) {
-					final String new_f_x = f_x.substring(i + 1, f_x.length());
+					final String new_f_x = f_x.substring(i + 1);
 					value = eval(function, xi) + eval(new_f_x, xi);
 					i = i + new_f_x.length();
 					hasFunction = false;
 					function = "";
 				} else {
-					final String new_f_x = f_x.substring(i + 1, f_x.length());
+					final String new_f_x = f_x.substring(i + 1);
 					value = value + eval(new_f_x, xi);
 					i = i + new_f_x.length();
 				}
@@ -77,19 +77,19 @@ public class Function {
 
 				if (hasNumber) {
 					final Double numb = new Double(number);
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = numb * eval(new_f_x, xi);
 					i = i + new_f_x.length();
 					hasNumber = false;
 					number = "";
 				} else if (hasFunction) {
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = eval(function, xi) * eval(new_f_x, xi);
 					i = i + new_f_x.length();
 					hasFunction = false;
 					function = "";
 				} else {
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = value * eval(new_f_x, xi);
 					i = i + new_f_x.length();
 				}
@@ -98,19 +98,19 @@ public class Function {
 
 				if (hasNumber) {
 					final Double numb = new Double(number);
-					final String new_f_x = nextMinusFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextMinusFunction(f_x.substring(i + 1));
 					value = numb - eval(new_f_x, xi);
 					i = i + new_f_x.length();
 					hasNumber = false;
 					number = "";
 				} else if (hasFunction) {
-					final String new_f_x = nextMinusFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextMinusFunction(f_x.substring(i + 1));
 					value = eval(function, xi) - eval(new_f_x, xi);
 					i = i + new_f_x.length();
 					hasFunction = false;
 					function = "";
 				} else {
-					final String new_f_x = nextMinusFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextMinusFunction(f_x.substring(i + 1));
 					value = value - eval(new_f_x, xi);
 					i = i + new_f_x.length();
 				}
@@ -119,19 +119,19 @@ public class Function {
 
 				if (hasNumber) {
 					final Double numb = new Double(number);
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = numb / eval(new_f_x, xi);
 					i = i + new_f_x.length();
 					hasNumber = false;
 					number = "";
 				} else if (hasFunction) {
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = eval(function, xi) / eval(new_f_x, xi);
 					i = i + new_f_x.length();
 					hasFunction = false;
 					function = "";
 				} else {
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = value / eval(new_f_x, xi);
 					i = i + new_f_x.length();
 				}
@@ -140,19 +140,19 @@ public class Function {
 
 				if (hasNumber) {
 					final Double numb = new Double(number);
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = Math.pow(numb.doubleValue(), eval(new_f_x, xi));
 					i = i + new_f_x.length();
 					hasNumber = false;
 					number = "";
 				} else if (hasFunction) {
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = Math.pow(eval(function, xi), eval(new_f_x, xi));
 					i = i + new_f_x.length();
 					hasFunction = false;
 					function = "";
 				} else {
-					final String new_f_x = nextFunction(f_x.substring(i + 1, f_x.length()));
+					final String new_f_x = nextFunction(f_x.substring(i + 1));
 					value = Math.pow(value, eval(new_f_x, xi));
 					i = i + new_f_x.length();
 				}
@@ -288,7 +288,8 @@ public class Function {
 			} else if (character == '.') {
 				result = result + character;
 			} else if (character == '(') {
-				final String new_f_x = f_x.substring(i, nextBracket(f_x) + 1);
+
+				final String new_f_x = f_x.substring(i   , nextBracket(f_x) + 1);
 				result = result + new_f_x;
 				i = (i + new_f_x.length()) - 1;
 			} else if (character == ')') {

@@ -69,7 +69,7 @@ public class Pow extends Pattern {
     @Override
     public String getDerivate(String target) {
 
-        String der = partsecond + " * " + "(" + partfirst + ")" +"^(" + partsecond + " - 1)";
+        String der = partsecond + " * (" + "(" + partfirst + ")" +"^(" + partsecond + " - 1))";
 
 
         if (partfirst.contains(target) && !partfirst.equals(target)) {

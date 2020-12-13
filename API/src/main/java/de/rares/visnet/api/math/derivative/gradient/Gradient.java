@@ -1,10 +1,12 @@
 package de.rares.visnet.api.math.derivative.gradient;
 
+import de.rares.visnet.api.math.derivative.derivative.DerivationManager;
+
 import java.util.HashMap;
-import java.util.Vector;
 
 public class Gradient {
 
+    private String[] dimensions;
     public String function;
     public HashMap<String, String> derivations = new HashMap<>();
 
@@ -14,6 +16,7 @@ public class Gradient {
             for (int i = 0; i < derivations.length; i++) {
                 this.derivations.put(dimensions[0], derivations[1]);
                 this.function = function;
+                this.dimensions = dimensions;
             }
         } else {
             throw new IndexOutOfBoundsException("der = dim");
@@ -22,8 +25,31 @@ public class Gradient {
 
     }
 
-    public HashMap<String, Double> getGradient(double[] coords){
+    public Gradient(String function, String[] dimensions) {
 
+        this.function = function;
+        this.dimensions = dimensions;
+        setupDerivations();
+
+
+    }
+
+    public void setupDerivations(){
+
+        for (String dimension : dimensions) {
+            derivations.put(dimension, new DerivationManager(function).derive(dimension));
+        }
+    }
+
+    public void output(){
+
+        for (String s : derivations.keySet()) {
+            System.out.println("t: " + s  + " der: " + derivations.get(s) );
+        }
+
+    }
+
+    public HashMap<String, Double> getGradient(double[] coords){
 
 return null;
     }

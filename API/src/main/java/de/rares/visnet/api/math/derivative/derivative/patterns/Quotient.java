@@ -47,7 +47,7 @@ public class Quotient extends Pattern{
 
     @Override
     public String getDerivate(String target) {
-        String der = "(" + new Derivative(partfirst).getDerivative(target)+ " * " + partsecond + " - " + new Derivative(partsecond).getDerivative(target) + " * " + partfirst + ")/((" + partsecond + ") * (" + partsecond + "))";
+        String der = "(" + new Derivative(partfirst).getDerivative(target)+ " * (" + partsecond + ") - " + new Derivative(partsecond).getDerivative(target) + " * " + partfirst + ")/((" + partsecond + ") * (" + partsecond + "))";
 
 
 

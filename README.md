@@ -5,9 +5,9 @@
        
  ✅ matrices and vector<br>
  ✅ derivation <br>
-  ❗ gradient<br>
- ❌ calculator<br>
- ❌ algorithms for learning and optimization<br>
+ ✅ gradient<br>
+ ✅ calculator<br>
+  ❗ algorithms for learning and optimization<br>
  ❌ activation functions<br>
  ❌ convolutional layers<br>
      |-> ❌ algorithms<br>

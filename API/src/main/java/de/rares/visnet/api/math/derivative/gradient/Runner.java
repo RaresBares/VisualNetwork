@@ -1,13 +1,14 @@
-package de.rares.visnet.api.math.derivative.gradient;
+ package de.rares.visnet.api.math.derivative.gradient;
 
-import java.util.HashMap;
-import java.util.Vector;
+ import de.rares.visnet.api.math.calculator.Parser;
+
+ import java.util.HashMap;
 
 public class Runner {
 
 
     public Gradient gradient;
-    public GradientType type;
+    public GradientType type = GradientType.SMOOTH;
     public HashMap<String, Double> coords;
 
     public Runner(Gradient gradient, HashMap<String, Double> coords) {
@@ -23,11 +24,21 @@ public class Runner {
 
 
     public HashMap<String, Double> getForce(){
-
+        HashMap<String, Double> force = new HashMap<>();
         if(type == GradientType.SMOOTH){
 
             for (String var : coords.keySet()) {
-              //  double der = gar;
+
+              String der  = gradient.derivations.get(var);
+                for (String cor : coords.keySet()) {
+
+                  der =   der.replace(cor, coords.get(cor) + "");
+                }
+
+
+                Double res = Parser.eval(der).getValue();
+               force.put(var,res);
+
             }
 
         }else if(type == GradientType.ZICKZACK){
@@ -37,7 +48,7 @@ public class Runner {
         }
 
 
-return null;
+return force;
     }
 
 }

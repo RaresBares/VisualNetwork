@@ -8,6 +8,7 @@
  ✅ gradient<br>
  ✅ calculator<br>
   ❗ algorithms for learning and optimization<br>
+ ❌ GPU support<br>
  ❌ activation functions<br>
  ❌ convolutional layers<br>
      |-> ❌ algorithms<br>
@@ -15,7 +16,6 @@
  ❌ SVM<br>
  ❌ k - nearest neighbours (with weights)<br>
  ❌ implementing multithreading<br>
- ❌ GPU support<br>
  ❌ Code  cleanup<br>
  ❌visual interface<br>
 

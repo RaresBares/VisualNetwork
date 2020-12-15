@@ -275,6 +275,8 @@ public class Function {
 
 
 	private String nextFunction(String f_x) throws IllegalArgumentException {
+
+
 		String result = "";
 		f_x = f_x.trim().toLowerCase();
 

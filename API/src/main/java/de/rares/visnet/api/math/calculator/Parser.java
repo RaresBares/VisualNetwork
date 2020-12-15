@@ -227,4 +227,6 @@ private static List<String> pointToVar(final Point... values) {
 	public static CalcResult calc(String term){
 		return null;
 	}
+
+
 }

@@ -3,10 +3,9 @@ package de.rares.visnet.api.math.calculator;
 
 public class ParserManager {
 
-	/** The deegre. */
+
 	private boolean deegre = false;
 
-	// ..... Other configuration values //
 
 
 	private static ParserManager instance = null;

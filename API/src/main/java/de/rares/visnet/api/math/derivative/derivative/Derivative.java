@@ -336,7 +336,7 @@ public class Derivative {
     public Pattern getPattern(String f, String target) {
 
         String patternConv = "";
-
+        f = trimClauses(f, true);
         try {
 
             ArrayList<String> parts = new ArrayList<String>();
@@ -394,15 +394,15 @@ public class Derivative {
         switch (patternConv) {
 
             case "v/v":
-
+                System.out.println("Deriv of " + f);
                 pattern = Quotient.of(f);
                 break;
             case "v^v":
-
+                System.out.println("Deriv of " + f);
                 pattern = Pow.of(f);
                 break;
             case "v":
-
+                System.out.println("Deriv of " + f);
                 pattern = X.of(f);
 
         }
@@ -440,7 +440,7 @@ public class Derivative {
 
             }else {
             if (mult.length == 1) {
-               
+
                 Pattern p = getPattern(trimClauses(mult[0], true),target);
         
                 derivative =  p.getDerivate(target); //derivative = "" + getPattern(trimClauses(mult[0], true)).getDerivate();

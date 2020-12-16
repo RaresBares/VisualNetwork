@@ -15,7 +15,7 @@
     <bytecodeTargetLevel target="8">
       <module name="API" target="1.8" />
       <module name="Example" target="1.5" />
-      <module name="Experiments" target="1.5" />
+      <module name="Experiments" target="1.8" />
       <module name="OpenImageFilter" target="1.5" />
       <module name="VisualNetwork" target="1.8" />
     </bytecodeTargetLevel>

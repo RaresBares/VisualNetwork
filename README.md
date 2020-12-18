@@ -7,7 +7,7 @@
  ✅ derivation <br>
  ✅ gradient<br>
  ✅ calculator<br>
-  ❗ algorithms for learning and optimization<br>
+ ✅ algorithms for learning and optimization<br>
  ❌ GPU support<br>
  ❌ activation functions<br>
  ❌ convolutional layers<br>

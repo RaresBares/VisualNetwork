@@ -1,6 +1,8 @@
 package de.rares.visnet.api.math.derivative.gradient;
 
-import de.rares.visnet.api.math.derivative.derivative.DerivationManager;
+
+
+import de.rares.visnet.api.math.derivative.derivative.Parser;
 
 import java.util.HashMap;
 
@@ -37,7 +39,7 @@ public class Gradient {
     public void setupDerivations(){
 
         for (String dimension : dimensions) {
-            derivations.put(dimension, new DerivationManager(function).derive(dimension));
+            derivations.put(dimension, Parser.match(function,dimension).getDerivative());
         }
     }
 

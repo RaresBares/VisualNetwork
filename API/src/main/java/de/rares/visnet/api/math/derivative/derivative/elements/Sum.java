@@ -1,6 +1,7 @@
-package der.elements;
+package de.rares.visnet.api.math.derivative.derivative.elements;
 
-import der.Parser;
+import de.rares.visnet.api.math.derivative.derivative.Parser;
+
 
 public class Sum extends Element {
 
@@ -14,6 +15,7 @@ public class Sum extends Element {
         super.term = String.join("+",cont);
         Element[] contr = new Element[cont.length];
         for (int i = 0; i < cont.length; i++) {
+            System.out.println("Summ of " + cont[i]  );
             contr[i] = Parser.match(Parser.trimClauses(cont[i],target),target);
         }
         this.cont = contr;

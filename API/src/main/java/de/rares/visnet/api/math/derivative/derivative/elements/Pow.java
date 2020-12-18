@@ -1,12 +1,13 @@
-package der.elements;
+package de.rares.visnet.api.math.derivative.derivative.elements;
 
-import der.Parser;
+import de.rares.visnet.api.math.derivative.derivative.Parser;
+
 
 public class Pow extends Element {
 
-    private String target;
     Element top;
     Element bottom;
+    private String target;
 
     public Pow(Element bottom,Element top) {
         this.top = top;
@@ -28,7 +29,7 @@ public class Pow extends Element {
 
     @Override
     public String getDerivative() {
-        String res = "(" + top.term + ")*(" + bottom.term  +")^(" + top.term + "-1)";
+        String res = "(" + top.term + ")*((" + bottom.term  +")^(" + top.term + "-1))";
 
         if(!bottom.term.equals(target) && bottom.term.contains(target)){
             res +="*(" + Parser.match(bottom.term,target ).getDerivative() + ")";

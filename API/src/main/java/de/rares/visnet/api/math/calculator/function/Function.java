@@ -33,6 +33,7 @@ public class Function {
 
 
 	private double eval(final String f_x, final double xi) throws IllegalArgumentException {
+
 		double value = 0;
 		String number = "";
 		String function = "";
@@ -265,6 +266,7 @@ public class Function {
 					}
 				}
 			} else {
+
 				throw new IllegalArgumentException("Invalid character:" + character);
 			}
 

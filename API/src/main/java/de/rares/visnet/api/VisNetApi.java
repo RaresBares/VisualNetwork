@@ -34,15 +34,18 @@ public class VisNetApi {
      public static void main(String[] args) {
 
 
-           String function = "((y + 3)^(2))+3";
-        Gradient g = new Gradient(function, new String[]{"x", "y"});
+         String function = "(e)^((x)^(2))";
+
+
+       Gradient g = new Gradient(function, new String[]{"x","y"});
         g.output();
         HashMap<String, Double> coords = new HashMap<>();
-        coords.put("x", 0.0);
-        coords.put("y", 3.0);
+        coords.put("x", 2.0);
+         coords.put("y",0.0);
+
         Runner r = new Runner(g,coords);
-        r.optimize(20);
-        System.out.println(r.coords.get("y") + "    " + r.coords.get("x"));
+        r.optimize(100);
+        System.out.println(r.getCoord("x") + "    " + r.getCoord("y") + "     " );
 
     }
 

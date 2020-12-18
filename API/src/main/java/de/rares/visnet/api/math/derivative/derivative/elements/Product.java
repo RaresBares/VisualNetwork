@@ -1,7 +1,7 @@
-package der.elements;
+package de.rares.visnet.api.math.derivative.derivative.elements;
 
 
-import der.Parser;
+import de.rares.visnet.api.math.derivative.derivative.Parser;
 
 public class Product extends Element {
 

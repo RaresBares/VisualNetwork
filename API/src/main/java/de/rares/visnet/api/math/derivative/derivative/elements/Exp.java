@@ -1,13 +1,14 @@
-package der.elements;
+package de.rares.visnet.api.math.derivative.derivative.elements;
 
-import der.Parser;
+import de.rares.visnet.api.math.derivative.derivative.Parser;
+
 
 public class Exp extends Element {
 
 
-    private String target;
     Element top;
     Element bottom;
+    private String target;
     public Exp(Element bottom,Element top) {
         this.top = top;
         this.bottom = bottom;
@@ -27,7 +28,7 @@ public class Exp extends Element {
 
     @Override
     public String getDerivative() {
-        String res = "(ln(" + bottom.term+ "))*(" + bottom.term  +")^(" + top.term + ")" ;
+        String res = "(ln(" + bottom.term+ "))*((" + bottom.term  +")^(" + top.term + "))" ;
         if(!top.equals(target)){
             res += "*("  + top.getDerivative()+")";
         }

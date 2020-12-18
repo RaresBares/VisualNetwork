@@ -36,8 +36,26 @@ public class Parser {
 	}
 
 
-	public static CalcResult eval(final String function) {
+	public static String evalln(String function){
+		String f  = function;
+		if(function.contains("ln(")) {
+			for (int i = -1; (i = function.indexOf("ln(", i + 1)) != -1; i++) {
 
+				int par = i+2;
+				System.out.println("beg " + par);
+				int parend =  de.rares.visnet.api.math.derivative.derivative.Parser.getClosingClause(function,par);
+				System.out.println("end " + parend);
+				System.out.println("resss "  +String.format("%.12f",Math.log(eval(function.substring(par+1,parend)).getValue())));
+				f = f.replace(function.substring(par-2,parend+1),String.format("%.12f",Math.log(eval(function.substring(par+1,parend)).getValue())).replace(",","."));
+
+			}
+		}
+return f;
+	}
+
+	public static CalcResult eval(final String f) {
+		String function = evalln(f);
+		System.out.println(function);
 		CalcResult result = new CalcResult();
 		Function f_x = null;
 

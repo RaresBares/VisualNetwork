@@ -32,7 +32,7 @@ public class Exp extends Element {
         if(!top.equals(target)){
             res += "*("  + top.getDerivative()+")";
         }
-        return res;
+        return res.replace("(1)*","");
     }
 
 

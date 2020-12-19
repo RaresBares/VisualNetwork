@@ -52,8 +52,9 @@ which means: the third neuron in the second layer
         }
 
             String[] resu = result;
-        for (int i = 1; i < layer.dimension; i++) {
-            resu = convertToFunction(resu,  i );
+        for (int i = 0; i < layer.dimension; i++) {
+            System.out.println("i" + i);
+            resu = convertToFunction(resu,  1 );
         }
 
 

@@ -26,7 +26,7 @@ public class Quotient extends Element {
 
     @Override
     public String getDerivative() {
-        String der = "(" + top.getDerivative()+ " * (" + bottom + ") - " + bottom.getDerivative() + " * " + top + ")/((" + bottom + ") * (" + bottom + "))";
-        return  der;
+        String der = "(" + top.getDerivative()+ " * (" + bottom.term + ") - " + bottom.getDerivative() + " * " + top.term + ")/((" + bottom.term + ") * (" + bottom.term + "))";
+        return  der.replace("(1)*","");
     }
 }

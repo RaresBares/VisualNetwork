@@ -1,10 +1,13 @@
 package de.rares.visnet.api;
 
 
-import de.rares.visnet.api.math.derivative.gradient.Gradient;
-import de.rares.visnet.api.math.derivative.gradient.Runner;
-
-import java.util.HashMap;
+import de.rares.visnet.api.math.structures.NumberType;
+import de.rares.visnet.api.math.structures.vector.Vector;
+import de.rares.visnet.api.math.structures.vector.VectorType;
+import de.rares.visnet.api.neuronalnetwork.activationfunction.ActivationFunction;
+import de.rares.visnet.api.neuronalnetwork.normal.NormalNeuronalNetwork;
+import de.rares.visnet.api.neuronalnetwork.normal.element.ElementType;
+import de.rares.visnet.api.neuronalnetwork.normal.element.layer.Layer;
 
 
 public class VisNetApi {
@@ -32,10 +35,20 @@ public class VisNetApi {
     }*/
 
      public static void main(String[] args) {
+        Vector v = new Vector(4, VectorType.COLUMN, NumberType.REAL);
+        v.content = new Double[]{1.0,2.0,3.0,4.0};
+         Layer input = new Layer(4, ActivationFunction.Sigmoid,ElementType.INPUT);
+         Layer output = new Layer(input,new Vector[]{v} ,ActivationFunction.Sigmoid, ElementType.HIDDEN);
+         Layer[] layer  = new Layer[]{input,output};
+         NormalNeuronalNetwork network = new NormalNeuronalNetwork(layer);
+        System.out.println(network.convertToFunction()[0]);
 
 
-         String function = "(e)^((x)^(2))";
 
+
+
+
+            /*
 
        Gradient g = new Gradient(function, new String[]{"x","y"});
         g.output();
@@ -46,7 +59,7 @@ public class VisNetApi {
         Runner r = new Runner(g,coords);
         r.optimize(100);
         System.out.println(r.getCoord("x") + "    " + r.getCoord("y") + "     " );
-
+*/
     }
 
 }

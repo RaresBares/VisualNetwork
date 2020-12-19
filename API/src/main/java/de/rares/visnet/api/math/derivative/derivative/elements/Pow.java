@@ -34,6 +34,6 @@ public class Pow extends Element {
         if(!bottom.term.equals(target) && bottom.term.contains(target)){
             res +="*(" + Parser.match(bottom.term,target ).getDerivative() + ")";
         }
-        return res;
+        return res.replace("(1)*","");
     }
 }

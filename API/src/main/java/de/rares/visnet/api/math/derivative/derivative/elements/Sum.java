@@ -34,6 +34,6 @@ public class Sum extends Element {
 
             }
         }
-        return res;
+        return res.replace("(1)*","");
     }
 }

@@ -7,13 +7,7 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    public static void main(String[] args) {
-        String func = "(x)^(2)+y";
-        String target = "y";
-        System.out.println(match(func,target).getDerivative());
 
-
-    }
 
 
     public static Element match(String t, String target) {
@@ -112,9 +106,18 @@ public class Parser {
 
     public static String[] splitAdd(String function,String target) {
 
+        if(function.toCharArray()[0] == '-' && splitAdd(function.substring(1),"").length  == 1){
+
+            return new String[]{function};
+
+        }
+
+
+       // String function = f.replace("-", "+(-1)*");
         ArrayList<String> res = new ArrayList<String>();
         String last = function;
         int lastAdd = -1;
+        boolean isNeg = false;
         for (int i = 0; i < function.length(); i++) {
 
             if (function.charAt(i) == '+' && InClauses(function, i) == 0) {
@@ -124,17 +127,22 @@ public class Parser {
                 lastAdd = i;
                 last = function.substring(lastAdd + 1);
 
-            } else if (function.charAt(i) == '-') {
+            } else if (function.charAt(i) == '-'&& InClauses(function, i) == 0) {
 
-                res.add(function.substring(lastAdd, i));
-                last = function.substring(lastAdd + 2);
-                lastAdd = i + 1;
+                res.add("" + function.substring(lastAdd+1, i));
+                lastAdd = i;
+                last = function.substring(lastAdd + 1);
+                isNeg = true;
 
             }
         }
         System.out.println(function + " is a sum of");
+        if(isNeg){
+            res.add("-" + last);
+        }else {
+            res.add(last);
+        }
 
-        res.add(last);
         for (String re : res) {
             System.out.println(" | " + re);
         }

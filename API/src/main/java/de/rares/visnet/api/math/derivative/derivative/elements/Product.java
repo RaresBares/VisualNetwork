@@ -63,6 +63,6 @@ public class Product extends Element {
 
         }
 
-        return res;
+        return res.replace("(1)*","");
     }
 }

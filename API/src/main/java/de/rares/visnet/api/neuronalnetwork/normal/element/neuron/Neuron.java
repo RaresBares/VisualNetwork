@@ -21,6 +21,13 @@ public class Neuron {
     }
 
 
+    public Neuron(ActivationFunction activationFunction, ElementType elementType) {
+        this.activationFunction = activationFunction;
+
+        this.elementType = elementType;
+    }
+
+
 
     public double process(Vector<Double> i) {
         if (elementType.equals(ElementType.INPUT) && i.dimension == 1) {

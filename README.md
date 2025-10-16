@@ -1,27 +1,27 @@
+# VeduNet API – Development Progress
 
+> **Disclaimer:**  
+> This repository documents an independent research and development project created by **Rares Sahleanu** for **Jugend forscht (Germany)** in **2020/2021**.  
+> The accompanying research paper, *“VeduNet – Faltende Neuronale Netze zum Selbermachen”*, can be viewed [here](./Visnet/Projekt.pdf).
 
+---
 
-<h1>ToDo: API</h1>
-       
- ✅ matrices and vector<br>
- ✅ derivation <br>
- ✅ gradient<br>
- ✅ calculator<br>
- ✅ algorithms for learning and optimization<br>
- ❌ GPU support<br>
- ❌ activation functions<br>
- ❌ convolutional layers<br>
-     |-> ❌ algorithms<br>
- ❌ KeypointDetections (FAST, Jarros, Shi)<br>
- ❌ SVM<br>
- ❌ k - nearest neighbours (with weights)<br>
- ❌ implementing multithreading<br>
- ❌ Code  cleanup<br>
- ❌visual interface<br>
+## Development Status
 
-
-
-
-
-
-  
+| Component | Status |
+|------------|:------:|
+| Matrices and vectors | ✅ |
+| Derivation engine | ✅ |
+| Gradient computation | ✅ |
+| Symbolic calculator | ✅ |
+| Learning and optimization algorithms | ✅ |
+| GPU support | ❌ |
+| Activation functions | ❌ |
+| Convolutional layers | ❌ |
+| &nbsp;&nbsp;&nbsp;&nbsp;↳ Algorithms | ❌ |
+| Keypoint detections (FAST, Jarros, Shi) | ❌ |
+| Support Vector Machine | ❌ |
+| k-nearest neighbours (weighted) | ❌ |
+| Multithreading implementation | ❌ |
+| Codebase cleanup | ❌ |
+| Visual interface | ❌ |

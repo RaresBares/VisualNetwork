@@ -2,7 +2,7 @@
 
 > **Disclaimer:**  
 > This repository documents an independent research and development project created by **Rares Sahleanu** for **Jugend forscht (Germany)** in **2020/2021**.  
-> The accompanying research paper, *“VeduNet – Faltende Neuronale Netze zum Selbermachen”*, can be viewed [here](./Visnet/Projekt.pdf).
+> The accompanying research paper, *“VeduNet – Faltende Neuronale Netze zum Selbermachen”*, can be viewed [here](./VisNet/Projekt.pdf).
 
 ---
 
